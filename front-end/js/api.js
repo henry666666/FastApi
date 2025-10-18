@@ -51,8 +51,8 @@ function apiRequest(endpoint, method = 'GET', data = null) {
 // 用户认证相关API
 const authAPI = {
     // 用户登录
-    login: function(phone, password) {
-        return apiRequest('/api/auth/login', 'POST', { phone, password });
+    login: function(username, password) {
+        return apiRequest('/api/users/login', 'POST', { username, password });
     },
 
     // 用户注册
@@ -62,7 +62,7 @@ const authAPI = {
 
     // 获取当前用户信息
     getCurrentUser: function() {
-        return apiRequest('/api/auth/me');
+        return apiRequest('/api/users/me');
     },
 
     // 用户登出
@@ -168,14 +168,13 @@ const utils = {
     },
 
     // 显示空状态
-    showEmptyState: function(element, message = '暂无数据') {
+    showEmptyState: function(element, message) {
+        message = message || '暂无数据';
         if (element) {
-            element.innerHTML = '
-                <div class="empty-state">
-                    <i class="fa fa-folder-open-o"></i>
-                    <p>' + message + '</p>
-                </div>
-            ';
+            element.innerHTML = '<div class="empty-state">' +
+                '<i class="fa fa-folder-open-o"></i>' +
+                '<p>' + message + '</p>' +
+                '</div>';
         }
     },
 

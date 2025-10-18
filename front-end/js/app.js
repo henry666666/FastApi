@@ -89,34 +89,33 @@ function displayUserInfo(userData) {
 function handleLogin(event) {
     event.preventDefault();
     
-    const phone = document.getElementById('phone').value;
+    const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     
     // 显示加载状态
     const submitBtn = loginForm.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<div class="loading" style="width: 20px; height: 20px; margin: 0 auto;"></div>';
     
     // 调用登录API
-    authAPI.login(phone, password)
+    authAPI.login(username, password)
         .then(function(response) {
-            // 保存认证信息
-            if (response.token) {
-                localStorage.setItem('authToken', response.token);
+            // 保存认证信息 - 后端返回access_token而非token
+            if (response.access_token) {
+                localStorage.setItem('authToken', response.access_token);
+                console.log('登录成功，已保存token');
+                
+                // 登录成功后直接显示登录状态，showLoggedInState会自动调用loadUserInfo获取用户信息
+                showLoggedInState();
+                
+                // 清空表单
+                loginForm.reset();
+            } else {
+                throw new Error('未收到有效认证令牌');
             }
-            
-            if (response.user) {
-                utils.saveUserInfo(response.user);
-            }
-            
-            // 显示登录成功状态
-            showLoggedInState();
-            
-            // 清空表单
-            loginForm.reset();
         })
         .catch(function(error) {
+            console.error('登录失败:', error);
             utils.showError(error.message || '登录失败，请检查账号密码');
         })
         .finally(function() {
