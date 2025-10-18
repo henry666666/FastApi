@@ -2,7 +2,57 @@
 
 ## 项目简介
 
-本项目是一个订单管理系统，由Spring Boot迁移至FastAPI框架实现。系统提供用户管理、商家管理、产品管理和订单处理等核心功能，采用现代化的Python异步Web框架构建，具备高性能和良好的开发体验。
+本项目是一个订单管理系统，由Spring Boot迁移至FastAPI框架实现。系统提供用户认证与授权、商家管理、商品管理和订单管理等核心功能，采用现代化的Python异步Web框架构建，具备高性能和良好的开发体验。
+
+项目采用了现代Python后端开发架构：
+- **FastAPI** 作为Web框架
+- **SQLAlchemy** 作为ORM
+- **Docker** 用于容器化部署
+- **SQLite** 作为数据库
+- **JWT** 用于身份认证
+
+## 项目文档体系
+
+为方便新接触项目的开发人员快速了解项目结构和重要文档内容，以下是项目文档列表及简要说明：
+
+1. **[README.md](README.md)**
+   **项目主文档**，包含项目概述、快速开始指南、基本使用说明等核心信息。
+
+2. **[TEST_RESULTS_SUMMARY.md](TEST_RESULTS_SUMMARY.md)**
+   **测试结果摘要**，记录了API测试的详细结果，包括测试用例执行情况、问题诊断与修复过程等。
+
+3. **[CI_CD_PROCESS.md](CI_CD_PROCESS.md)**
+   **CI/CD流程文档**，详细说明如何使用Docker Compose为FastAPI应用实现CI/CD流程。
+
+4. **[SIMPLE_API_TESTING_PLAN.md](SIMPLE_API_TESTING_PLAN.md)**
+   **简单API测试计划**，定义了项目API的基础测试策略、测试场景和测试方法。
+
+5. **[STABILITY_TESTING_PLAN.md](STABILITY_TESTING_PLAN.md)**
+   **稳定性测试计划**，专注于系统稳定性和性能测试的策略和方法。
+
+6. **[API_RESPONSE_OPTIMIZATION.md](API_RESPONSE_OPTIMIZATION.md)**
+   **API响应优化指南**，提供了优化API响应性能和质量的建议和方法。
+
+7. **[API_TESTING.md](API_TESTING.md)**
+   **API测试详细文档**，包含API测试的完整方法、工具使用和最佳实践。
+
+8. **[MIGRATION_PROCESS.md](MIGRATION_PROCESS.md)**
+   **数据库迁移流程**，描述了数据库结构变更和数据迁移的规范和步骤。
+
+9. **[PROJECT_MAPPING.md](PROJECT_MAPPING.md)**
+   **项目映射文档**，展示了项目各组件之间的关系和模块映射。
+
+10. **[TASK.md](TASK.md)**
+    **任务描述文档**，记录了项目的具体任务、要求和实现细节。
+
+## 推荐阅读顺序
+
+对于新接触项目的开发人员，建议按以下顺序阅读文档：
+
+1. 先阅读本README.md了解项目基本情况
+2. 查看[TEST_RESULTS_SUMMARY.md](TEST_RESULTS_SUMMARY.md)了解API功能和测试情况
+3. 阅读[CI_CD_PROCESS.md](CI_CD_PROCESS.md)了解如何部署和运行项目
+4. 根据需要深入阅读其他专业文档
 
 ## 项目架构
 
@@ -84,17 +134,33 @@ fastApi/
 - **数据验证**: Pydantic
 - **服务器**: Uvicorn
 
-## 项目启动步骤
+## 快速开始
 
-### 1. 环境准备
+### 环境要求
+- Docker Desktop (Windows/macOS) 或 Docker + Docker Compose (Linux)
+- Python 3.11+（如直接在本地运行）
 
-确保已安装Python 3.8或更高版本，然后克隆项目并进入项目目录：
+### 使用Docker运行项目
+
+```bash
+# Windows系统
+start_services.bat --build
+
+# Linux/macOS系统
+./start_services.sh --build
+```
+
+### 使用Python直接运行
+
+#### 1. 环境准备
+
+确保已安装Python 3.8或更高版本，然后进入项目目录：
 
 ```bash
 cd c:/Users/Administrator/Desktop/testdemo/java-demo/fastApi
 ```
 
-### 2. 安装依赖
+#### 2. 安装依赖
 
 使用pip安装项目所需的所有依赖：
 
@@ -102,11 +168,11 @@ cd c:/Users/Administrator/Desktop/testdemo/java-demo/fastApi
 pip install -r requirements.txt
 ```
 
-### 3. 数据库初始化
+#### 3. 数据库初始化
 
 项目使用SQLite数据库，数据库文件会在首次运行时自动创建，无需额外配置。
 
-### 4. 启动应用
+#### 4. 启动应用
 
 使用以下命令启动FastAPI应用：
 
@@ -118,16 +184,29 @@ python -m uvicorn app:app --host 0.0.0.0 --port 8000 --reload
 - `--port 8000`: 使用8000端口
 - `--reload`: 启用热重载，修改代码后自动重启服务
 
-### 5. 访问API文档
+### 运行测试
+
+```bash
+# Windows系统
+start_services.bat --test
+
+# Linux/macOS系统
+docker-compose run app python -m pytest
+
+# 直接使用Python运行
+python -m pytest
+```
+
+### 访问API文档
 
 应用启动后，可以通过以下地址访问自动生成的API文档：
 
 - Swagger UI: http://localhost:8000/docs
 - ReDoc: http://localhost:8000/redoc
 
-### 6. 停止服务
+### 停止服务
 
-按 `Ctrl + C` 停止运行中的服务
+按 `Ctrl + C` 停止运行中的服务（如果直接使用Python运行）
 
 ## API使用说明
 
@@ -179,92 +258,22 @@ python -m uvicorn app:app --host 0.0.0.0 --port 8000 --reload
 - 利用FastAPI的交互式文档进行API测试
 - 使用Python内置的pdb模块进行代码调试
 
-## 相关文档
+## 迁移检查清单
 
-- **迁移过程文档**: [MIGRATION_PROCESS.md](MIGRATION_PROCESS.md)
-- **项目映射文档**: [PROJECT_MAPPING.md](PROJECT_MAPPING.md)
-- **FastAPI官方文档**: https://fastapi.tiangolo.com/
-- **SQLAlchemy官方文档**: https://docs.sqlalchemy.org/
+- [ ] 设置FastAPI项目结构
+- [ ] 实现SQLAlchemy模型
+- [ ] 创建Pydantic模型
+- [ ] 移植核心业务逻辑
+- [ ] 实现API端点
+- [ ] 添加认证功能
+- [ ] 设置数据库迁移
+- [ ] 编写单元测试
+- [ ] 配置部署
+
+请查看`TASK.MD`了解详细的实施任务和进度跟踪。
 
 ## 许可证
 
-MIT License
+© 2023 订单管理系统。保留所有权利。
 
-## API Specification Comparison
-
-### User API
-
-#### Spring Boot
-```java
-@PostMapping("/register")
-public ResponseEntity<UserResponse> registerUser(
-    @RequestBody UserRegistrationRequest request) {
-    // ...
-}
-
-@GetMapping("/{id}")  
-public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
-    // ...
-}
-```
-
-#### FastAPI Equivalent
-```python
-@app.post("/users/register", response_model=schemas.UserResponse)
-async def register_user(user: schemas.UserCreate):
-    # ...
-
-@app.get("/users/{user_id}", response_model=schemas.UserResponse)  
-async def get_user(user_id: int):
-    # ...
-```
-
-### Order API
-
-#### Spring Boot  
-```java
-@PostMapping("/place")
-public ResponseEntity<Order> placeOrder(
-    @RequestBody CreateOrderRequest request) {
-    // ...
-}
-
-@PostMapping("/{id}/confirm")
-public ResponseEntity<Order> confirmOrder(@PathVariable Long id) {
-    // ...
-}
-```
-
-#### FastAPI Equivalent
-```python
-@app.post("/orders/", response_model=schemas.Order)
-async def place_order(order: schemas.OrderCreate):
-    # ...
-
-@app.post("/orders/{order_id}/confirm", response_model=schemas.Order)
-async def confirm_order(order_id: int):
-    # ...
-```
-
-## Migration Checklist
-
-- [ ] Set up FastAPI project structure
-- [ ] Implement SQLAlchemy models
-- [ ] Create Pydantic schemas
-- [ ] Port core business logic
-- [ ] Implement API endpoints
-- [ ] Add authentication
-- [ ] Set up database migrations
-- [ ] Write unit tests
-- [ ] Configure deployment
-
-## Next Steps
-
-1. Review the current Spring Boot implementation details
-2. Begin with database model implementation
-3. Progressively migrate modules:
-   - Users → Merchants → Products → Orders
-4. Test each migrated component
-5. Final integration testing
-
-See `TASK.MD` for detailed implementation tasks and progress tracking.
+本项目仅作为学习和演示用途，未经授权不得用于商业目的。您可以自由修改和学习本项目的代码，但请在使用时注明原作者和来源。
