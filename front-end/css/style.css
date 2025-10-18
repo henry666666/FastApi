@@ -1,0 +1,350 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+}
+
+/* 容器样式 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 导航栏样式 */
+.navbar {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: #34495e;
+}
+
+/* 主内容区域 */
+main {
+    padding: 40px 0;
+}
+
+/* 欢迎区域 */
+.welcome-section {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.welcome-section h1 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 32px;
+}
+
+.welcome-section p {
+    color: #7f8c8d;
+    font-size: 18px;
+}
+
+/* 表单区域 */
+.form-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    margin: 0 auto 40px;
+}
+
+.form-section h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* 按钮样式 */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: white;
+    width: 100%;
+    font-weight: 500;
+}
+
+.btn-secondary {
+    background-color: #2ecc71;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* 信息卡片 */
+.info-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
+}
+
+.info-section h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-card {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+}
+
+.info-card p {
+    margin-bottom: 10px;
+}
+
+.info-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* 演示区域 */
+.demo-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.demo-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.demo-card h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+/* 结果区域 */
+.result-area {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    min-height: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #e9ecef;
+}
+
+.result-item {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #dee2e6;
+}
+
+.result-item:last-child {
+    margin-bottom: 0;
+}
+
+.result-item h4 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.result-item p {
+    color: #6c757d;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/* 错误消息 */
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+}
+
+/* 加载动画 */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.loading::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 页脚样式 */
+.footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .demo-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-section {
+        margin: 0 auto 30px;
+    }
+    
+    .welcome-section h1 {
+        font-size: 24px;
+    }
+    
+    .welcome-section p {
+        font-size: 16px;
+    }
+}
+
+/* 空状态样式 */
+.empty-state {
+    text-align: center;
+    padding: 30px;
+    color: #7f8c8d;
+}
+
+.empty-state i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+/* 成功消息 */
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+}

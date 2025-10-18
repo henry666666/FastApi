@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # FastAPI应用服务
+  app:
+    build: .
+    container_name: fastapi_app
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://admin:password@db:5432/example_db
+      - SECRET_KEY=${SECRET_KEY:-your-secret-key-here}
+      - DEBUG=${DEBUG:-False}
+    volumes:
+      - .:/app
+    networks:
+      - app_network
+
+  # PostgreSQL数据库服务
+  db:
+    image: postgres:14-alpine
+    container_name: postgres_db
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=example_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app_network
+
+  # 数据库迁移服务（可选）
+  migration:
+    build: .
+    container_name: alembic_migration
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://admin:password@db:5432/example_db
+    command: >
+      sh -c "sleep 5 && alembic upgrade head"
+    networks:
+      - app_network
+
+  # Nginx反向代理（可选，生产环境使用）
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/certs:/etc/nginx/certs
+    depends_on:
+      - app
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  app_network:
+    driver: bridge
